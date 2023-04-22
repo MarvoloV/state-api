@@ -14,7 +14,7 @@ export class TransactionController {
 
   @Get()
   findAll() {
-    return this.transactionService.findAll();
+    return this.transactionService.getPaypalBearerToken();
   }
 
   @Get(':id')

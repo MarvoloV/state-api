@@ -4,11 +4,12 @@ import { TransactionController } from './transaction.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Transaction, TransactionSchema } from './entities/transaction.entity';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   controllers: [TransactionController],
   providers: [TransactionService],
-  imports: [
+  imports: [HttpModule,
     ConfigModule,
     MongooseModule.forFeature([
       { name: Transaction.name, schema: TransactionSchema },
