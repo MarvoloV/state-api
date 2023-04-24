@@ -9,7 +9,7 @@ export class PaymentController {
 
   @Post()
   create(@Body() createPaymentDto: CreatePaymentDto) {
-    return this.paymentService.payOrder(createPaymentDto);
+    return this.paymentService.MintCoin(createPaymentDto);
   }
 
 }

@@ -10,6 +10,12 @@ export class Transaction extends Document {
   email: string;
   @Prop()
   dni: string;
+  @Prop()
+  fullName: string;
+  @Prop({ unique: true })
+  idTransactionPaypal: string;
+  @Prop()
+  quantity: number;
 }
 
 export const TransactionSchema = SchemaFactory.createForClass(Transaction);

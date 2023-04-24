@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { EnvConfiguration } from './config/app.config';
 import { TransactionModule } from './transaction/transaction.module';
 import { PaymentModule } from './payment/payment.module';
+import { ContractsModule } from './contracts/contracts.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { PaymentModule } from './payment/payment.module';
     MongooseModule.forRoot(process.env.MONGODB),
     TransactionModule,
     PaymentModule,
+    ContractsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

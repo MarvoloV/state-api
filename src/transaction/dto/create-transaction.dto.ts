@@ -23,4 +23,12 @@ export class CreateTransactionDto {
   @Min(10000000, { message: 'longitud minima es de 8 digitos' })
   @Max(99999999, { message: 'longitud maxima es de 8 digitos' })
   dni: number;
+  @MinLength(1)
+  @IsString()
+  fullName:string;
+  @IsString()
+  idTransactionPaypal:string;
+  @IsNumber()
+  @IsPositive()
+  quantity:number;
 }
