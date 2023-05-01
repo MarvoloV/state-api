@@ -33,17 +33,14 @@ export class OrderService {
     return `This action updates a #${id} order`;
   }
   private handleExceptions(error: any) {
-    console.log(
-      '🚀 ~ file: transaction.service.ts:38 ~ TransactionService ~ handleExceptions ~ error:',
-      error,
-    );
+   
     // if (error.code === 11000) {
     //   throw new BadRequestException(
     //     `Pokemon exist in db ${JSON.stringify(error.keyValue)}`,
     //   );
     // }
     throw new InternalServerErrorException(
-      `Can´t Update Pokemon - Check Server logs`,
+      `Can´t Order  - Check Server logs`,
     );
   }
 }

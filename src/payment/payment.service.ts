@@ -44,7 +44,7 @@ export class PaymentService {
       );
       return responseData.access_token;
     } catch (error) {
-      console.log("🚀 ~ file: payment.service.ts:47 ~ PaymentService ~ getPaypalBearerToken ~ error:", error)
+      
       throw new BadRequestException({
         message:error
       });
@@ -77,7 +77,7 @@ export class PaymentService {
       );
       return responseData;
     } catch (error) {
-      console.log("🚀 ~ file: payment.service.ts:80 ~ PaymentService ~ payOrder ~ error:", error)
+      
       throw new BadRequestException({
         message: error,
       });
@@ -93,7 +93,7 @@ export class PaymentService {
       }
     try {      
       const isTransactionDuplicate = await this.transactionModel.find({idTransactionPaypal:createPaymentDto.transactionId});
-      console.log("🚀 ~ file: payment.service.ts:95 ~ PaymentService ~ MintCoin ~ isTransactionDuplicate:", isTransactionDuplicate)
+      
       if(isTransactionDuplicate.length!==0){
          throw new BadRequestException({
           message: 'id de transaccion duplicado',
@@ -136,14 +136,14 @@ export class PaymentService {
     const responseData = await lastValueFrom(
       this.http.post(process.env.PAYPAL_GENERATE_TOKEN,{}, requestConfig).pipe(
         map((response) => {
-          console.log("🚀 ~ file: payment.service.ts:139 ~ PaymentService ~ map ~ response:", response)
+          
           return response.data;
         }),
       ),
     );
     return responseData;
   } catch (error) {
-    console.log("🚀 ~ file: payment.service.ts:47 ~ PaymentService ~ getPaypalBearerToken ~ error:", error)
+    
     throw new BadRequestException({
       message:error
     });
