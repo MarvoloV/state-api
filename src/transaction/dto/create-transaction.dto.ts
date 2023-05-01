@@ -3,6 +3,7 @@ import {
   IsInt,
   IsNumber,
   isNumber,
+  IsOptional,
   IsPositive,
   isString,
   IsString,
@@ -26,9 +27,9 @@ export class CreateTransactionDto {
   @MinLength(1)
   @IsString()
   fullName:string;
-  @IsString()
-  idTransactionPaypal:string;
   @IsNumber()
   @IsPositive()
   quantity:number;
+  @IsString()
+  idTransactionPaypal?:string;
 }

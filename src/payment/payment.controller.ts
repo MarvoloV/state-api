@@ -11,5 +11,8 @@ export class PaymentController {
   create(@Body() createPaymentDto: CreatePaymentDto) {
     return this.paymentService.MintCoin(createPaymentDto);
   }
-
+  @Post("generate-key")
+  generateKey() {
+    return this.paymentService.generateAccessToken();
+  }
 }

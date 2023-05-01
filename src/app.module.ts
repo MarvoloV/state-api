@@ -7,6 +7,7 @@ import { EnvConfiguration } from './config/app.config';
 import { TransactionModule } from './transaction/transaction.module';
 import { PaymentModule } from './payment/payment.module';
 import { ContractsModule } from './contracts/contracts.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ContractsModule } from './contracts/contracts.module';
     TransactionModule,
     PaymentModule,
     ContractsModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

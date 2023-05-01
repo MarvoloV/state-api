@@ -12,10 +12,10 @@ export class Transaction extends Document {
   dni: string;
   @Prop()
   fullName: string;
-  @Prop({ unique: true })
-  idTransactionPaypal: string;
   @Prop()
   quantity: number;
+  @Prop({ unique: true })
+  idTransactionPaypal: string;
 }
 
 export const TransactionSchema = SchemaFactory.createForClass(Transaction);

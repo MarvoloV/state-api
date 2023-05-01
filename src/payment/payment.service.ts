@@ -123,4 +123,31 @@ export class PaymentService {
       
     }
   }
+ async generateAccessToken()  {
+  const paypalBearerToken = await this.getPaypalBearerToken();
+  const requestConfig: AxiosRequestConfig = {
+    headers: {
+      Authorization: `Bearer ${paypalBearerToken}`,
+      "Accept-Language": "en_US",
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const responseData = await lastValueFrom(
+      this.http.post(process.env.PAYPAL_GENERATE_TOKEN,{}, requestConfig).pipe(
+        map((response) => {
+          console.log("🚀 ~ file: payment.service.ts:139 ~ PaymentService ~ map ~ response:", response)
+          return response.data;
+        }),
+      ),
+    );
+    return responseData;
+  } catch (error) {
+    console.log("🚀 ~ file: payment.service.ts:47 ~ PaymentService ~ getPaypalBearerToken ~ error:", error)
+    throw new BadRequestException({
+      message:error
+    });
+  }
+    
+ }
 }
