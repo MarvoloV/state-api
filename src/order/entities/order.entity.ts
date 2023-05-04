@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema()
+@Schema({timestamps:true})
 export class Order extends Document {
   @Prop({ unique: true })
   orderId: string;
@@ -10,7 +10,7 @@ export class Order extends Document {
   @Prop()
   isComplete:boolean;
   @Prop()
-  isWallet:boolean
+  isWallet:boolean;
 }
 
 

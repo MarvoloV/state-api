@@ -9,6 +9,7 @@ import { Transaction } from 'src/transaction/entities/transaction.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { IMintCoin } from './interfaces/IMintCoin';
 import { CreateTransactionDto } from 'src/transaction/dto/create-transaction.dto';
+import { CaptureOrderDto } from './dto/capture-order.dto';
 
 @Injectable()
 export class PaymentService {
@@ -86,6 +87,7 @@ export class PaymentService {
   }
   async MintCoin(createPaymentDto: CreatePaymentDto) {
     const detail = await this.payOrder(createPaymentDto);
+      console.log("🚀 ~ file: payment.service.ts:90 ~ PaymentService ~ MintCoin ~ detail:", detail);
       if (detail.status !== 'COMPLETED') {
         throw new BadRequestException({
           message: 'transaccion no se completo',
@@ -149,5 +151,70 @@ export class PaymentService {
     });
   }
     
+ }
+ async createOrder(){
+  const paypalBearerToken = await this.getPaypalBearerToken();
+  const purchaseAmount = "100.00"; // TODO: pull prices from a database
+  const requestConfig: AxiosRequestConfig = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${paypalBearerToken}`,
+    },
+  };
+  try {
+    const responseData = await lastValueFrom(
+      this.http.post(process.env.PAYPAL_ORDERS_URL,{
+        intent: "CAPTURE",
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD",
+              value: purchaseAmount,
+            },
+          },
+        ],
+      }, requestConfig).pipe(
+        map((response) => {
+          
+          return response.data;
+        }),
+      ),
+    );
+    return responseData;
+  } catch (error) {
+    
+    throw new BadRequestException({
+      message:error
+    });
+  }
+  
+ }
+ async captureOrder(orderId:string){
+  const paypalBearerToken = await this.getPaypalBearerToken();
+  console.log("🚀 ~ file: payment.service.ts:193 ~ PaymentService ~ captureOrder ~ paypalBearerToken:", paypalBearerToken)
+  const requestConfig: AxiosRequestConfig = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${paypalBearerToken}`,
+    },
+  };
+  try {
+    const responseData = await lastValueFrom(
+      this.http.post(`${process.env.PAYPAL_ORDERS_URL}/${orderId}/capture`,{}, requestConfig).pipe(
+        map((response) => {
+          return response.data;
+        }),
+      ),
+    );
+    console.log("🚀 ~ file: payment.service.ts:208 ~ PaymentService ~ captureOrder ~ responseData:", responseData)
+    return responseData;
+  } catch (error) {
+    console.log("🚀 ~ file: payment.service.ts:211 ~ PaymentService ~ captureOrder ~ error:", error)
+    
+    throw new BadRequestException({
+      error
+    });
+  }
+  
  }
 }

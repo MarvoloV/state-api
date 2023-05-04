@@ -29,8 +29,9 @@ export class OrderService {
       return order;
      
   }
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
+    const orderUpdate= await this.orderModel.findOneAndUpdate({orderId:id},updateOrderDto);
+    return orderUpdate;
   }
   private handleExceptions(error: any) {
    

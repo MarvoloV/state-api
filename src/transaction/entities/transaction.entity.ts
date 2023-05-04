@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-@Schema()
+@Schema({timestamps:true})
 export class Transaction extends Document {
   @Prop({
     unique: true,
