@@ -25,4 +25,8 @@ export class PaymentController {
   ){
     return this.paymentService.captureOrder(id);
   }
+  @Get()
+  totalSuppy(){
+    return this.paymentService.getTotalSupply();
+  }
 }

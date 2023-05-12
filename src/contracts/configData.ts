@@ -1,4 +1,4 @@
 import * as RealStateABI from './jsons/realstateABI.json';
 
-export const WONKA_1155_CONTRACT_ADDRESS = "0xdE2586E2A545148DD49A9f6831b6267000facA23";
+export const WONKA_1155_CONTRACT_ADDRESS = "0x6d1ec61a267ac3BD01AdaC8De71f1f496C9cE5A4";
 export const WONKA_1155_ABI = RealStateABI.abi;

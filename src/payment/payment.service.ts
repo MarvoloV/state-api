@@ -101,7 +101,7 @@ export class PaymentService {
           message: 'id de transaccion duplicado',
         });
       }
-      const response:IMintCoin = await this.contractService.mint(1,createPaymentDto.quantity,createPaymentDto.dni,createPaymentDto.email,createPaymentDto.firstName,createPaymentDto.lastName);
+      const response:IMintCoin = await this.contractService.mint(createPaymentDto.tokenId,createPaymentDto.quantity,createPaymentDto.dni,createPaymentDto.email,createPaymentDto.firstName,createPaymentDto.lastName);
       if(response.status!=="sent"){
         throw new BadRequestException({
           message: 'No se pudo mintear bien',
@@ -118,9 +118,10 @@ export class PaymentService {
       const transaction = await this.transactionModel.create(transactionInfo);
       return transaction;
     } catch (error) {
-      throw new BadRequestException({
-        message: 'id de transaccion duplicado',
-      });
+      console.log("🚀 ~ file: payment.service.ts:120 ~ PaymentService ~ MintCoin ~ error:", error);
+      // throw new BadRequestException({
+      //   message: 'id de transaccion duplicado',
+      // });
       
       
     }
@@ -206,7 +207,6 @@ export class PaymentService {
         }),
       ),
     );
-    console.log("🚀 ~ file: payment.service.ts:208 ~ PaymentService ~ captureOrder ~ responseData:", responseData)
     return responseData;
   } catch (error) {
     console.log("🚀 ~ file: payment.service.ts:211 ~ PaymentService ~ captureOrder ~ error:", error)
@@ -216,5 +216,9 @@ export class PaymentService {
     });
   }
   
+ }
+ async getTotalSupply(){
+  const response = await this.contractService.totalSupply();
+  return response;
  }
 }

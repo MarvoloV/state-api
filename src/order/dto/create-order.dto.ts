@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsPositive, IsString, IsUUID } from "class-validator";
+import { IsBoolean, isNumber, IsNumber, IsPositive, IsString, IsUUID } from "class-validator";
 
 export class CreateOrderDto {
   @IsUUID(4)
@@ -10,4 +10,6 @@ export class CreateOrderDto {
   isComplete:boolean
   @IsBoolean()
   isWallet:boolean
+  @IsNumber()
+  tokenId:number
 }

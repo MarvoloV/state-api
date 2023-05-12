@@ -17,4 +17,6 @@ export class CreatePaymentDto {
   @IsNumber()
   @IsPositive()
   quantity:number;
+  @IsNumber()
+  tokenId:number;
 }

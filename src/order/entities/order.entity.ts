@@ -11,6 +11,8 @@ export class Order extends Document {
   isComplete:boolean;
   @Prop()
   isWallet:boolean;
+  @Prop()
+  tokenId:number;
 }
 
 
